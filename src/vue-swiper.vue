@@ -1,24 +1,13 @@
 <template>
-    <div class="swiper"
-         :class="[direction, {'dragging': dragging}]"
-         @touchstart="_onTouchStart"
-         @mousedown="_onTouchStart"
-         @wheel="_onWheel">
-        <div class="swiper-wrap"
-             v-el:swiper-wrap
-             :style="{
+    <div class="swiper" :class="[direction, {'dragging': dragging}]" @touchstart="_onTouchStart" @mousedown="_onTouchStart" @wheel="_onWheel">
+        <div class="swiper-wrap" v-el:swiper-wrap :style="{
                 'transform' : 'translate3d(' + translateX + 'px,' + translateY + 'px, 0)',
                 'transition-duration': transitionDuration + 'ms'
-             }"
-             @transitionend="_onTransitionEnd">
+             }" @transitionend="_onTransitionEnd">
             <slot></slot>
         </div>
-        <div class="swiper-pagination"
-             v-show="paginationVisible">
-            <span class="swiper-pagination-bullet"
-                  :class="{'active': $index+1===currentPage}"
-                  v-for="slide in slideEls"
-                  @click="paginationClickable && setPage($index+1)"></span>
+        <div class="swiper-pagination" v-show="paginationVisible">
+            <span class="swiper-pagination-bullet" :class="{'active': $index+1===currentPage}" v-for="slide in slideEls" @click="paginationClickable && setPage($index+1)"></span>
         </div>
     </div>
 </template>
@@ -69,8 +58,8 @@
                 delta: 0,
                 dragging: false,
                 startPos: null,
+                slideEls : [],
                 transitioning: false,
-                slideEls: [],
                 translateOffset: 0,
                 transitionDuration: 0
             };
@@ -87,6 +76,11 @@
             } else {
                 this.setPage(this.currentPage);
             }
+            
+            var self = this;
+            this.$watch("$els.swiperWrap.children", function(o, n){
+                self.slideEls = n;
+            });
         },
         methods: {
             next() {
@@ -137,6 +131,9 @@
             isVertical() {
                 return this.direction === VERTICAL;
             },
+            reloadSlot() {
+                this.slideEls = [].map.call(this.$els.swiperWrap.children, el => el);
+            },
             _onTouchStart(e) {
                 this.startPos = this._getTouchPos(e);
                 this.delta = 0;
@@ -159,7 +156,7 @@
                 }
 
                 if (this.isVertical() || this.isHorizontal() && Math.abs(this.delta) > 0) {
-                    e.preventDefault();
+                    //e.preventDefault();
                 }
             },
             _onTouchEnd(e) {

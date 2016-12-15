@@ -1,23 +1,22 @@
-[![npm](https://img.shields.io/npm/l/vue-swiper.svg?maxAge=2592000)](https://raw.githubusercontent.com/weilao/vue-swiper/master/LICENSE)
-[![npm](https://img.shields.io/npm/v/vue-swiper.svg?maxAge=2592000)](https://www.npmjs.com/package/vue-swiper)
-[![GitHub release](https://img.shields.io/github/release/weilao/vue-swiper.svg?maxAge=2592000)](https://github.com/weilao/vue-swiper/releases)
-[![GitHub issues](https://img.shields.io/github/issues/weilao/vue-swiper.svg?maxAge=2592000)](https://github.com/weilao/vue-swiper/issues)
-[![GitHub stars](https://img.shields.io/github/stars/weilao/vue-swiper.svg?style=social&label=Star&maxAge=2592000)](https://github.com/weilao/vue-swiper) 
-
-[![NPM](https://nodei.co/npm/vue-swiper.png?downloads=true&downloadRank=true)](https://nodei.co/npm/vue-swiper/)
-
 # vue-swiper
-Swiper component. Easy to use.
+Swiper component. Easy to use. [MM修改版]
+
+#修改日志
+- 优化 `webpack` 的配置
+- 优化/增加 `npm` 脚本。
+```
+npm run dev //开发watch模式
+npm run dist //产品打包模式
+npm run build //hot rebuild 开发服务器模式 
+``` 
+- 增加了一个 `reloadSlot` 方法用于重新渲染动态添加的item。
+- 去掉了 `_onTouchMove` 时对默认touchmove 事件的停止冒泡，兼容一些需要四个方向滚动的情况。
+
 
 ## Examples
 [basic demo](http://weilao.github.io/vue-swiper/demo)
 
 [webpack ES2015 demo](http://www.webpackbin.com/4kbKGs97b)
-
-## Install
-```
-npm i vue-swiper -S
-```
 
 ## Usage
 
@@ -73,6 +72,7 @@ new Vue({
 | next()            | Go next page.            |
 | prev()            | Go previous page.        |
 | setPage(`Number`) | Set current page number. |
+| reloadSlot()      | Reload items.            |
 
 ### Events
 | Name                            | Parameters | Description                                                                                                                                                  |

@@ -14,8 +14,9 @@
   "homepage": "https://github.com/weilao/vue-swiper",
   "main": "dist/vue-swiper.js",
   "scripts": {
-    "dev": "NODE_ENV=dev webpack-dev-server --inline --hot --host 0.0.0.0 --config webpack.config.js",
-    "build": "webpack"
+    "test": "webpack-dev-server --inline --hot --host 0.0.0.0 --env dev --config webpack.config.js",
+    "dev": "webpack --config webpack.config.js --env dev",
+    "build": "webpack --env dist"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.6",
@@ -27,6 +28,7 @@
     "css-loader": "^0.23.1",
     "less": "^2.7.0",
     "less-loader": "^2.2.3",
+    "optimist": "^0.6.1",
     "vue-hot-reload-api": "^1.3.2",
     "vue-html-loader": "^1.2.2",
     "vue-loader": "^8.3.1",
